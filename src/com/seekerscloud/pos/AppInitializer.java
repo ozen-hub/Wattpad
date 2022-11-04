@@ -18,5 +18,6 @@ public class AppInitializer extends Application {
         primaryStage.setScene(new Scene(
                 FXMLLoader.load(getClass().getResource("view/LoginForm.fxml"))));
         primaryStage.show();
+
     }
 }
