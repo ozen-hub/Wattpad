@@ -31,6 +31,8 @@ public class CustomerFormController {
 
     public void initialize(){
         setTableData();
+        setCustomerId();
+
         //==============
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -62,6 +64,7 @@ public class CustomerFormController {
         if (Database.customerTable.add(customer)){
             new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved!").show();
             setTableData();
+            setCustomerId();
         }else{
             new Alert(Alert.AlertType.CONFIRMATION, "Try Again").show();
         }
@@ -77,6 +80,33 @@ public class CustomerFormController {
             obList.add(tm);
         }
         tblCustomer.setItems(obList);
+    }
+
+    private void setCustomerId(){
+        //get last saved customer
+        // catch the id (C-001)
+        // separate the numbers from the character
+        // increment the separated number
+        // concat the character again to the incremented number (C-002)
+        // set CustomerId
+        if (!Database.customerTable.isEmpty()){
+            Customer c= Database.customerTable.get(Database.customerTable.size()-1); //[10,20] size=2 => last => size-1 = 1 [10,20]
+            String id = c.getId(); // C-002
+            String dataArray[] = id.split("-");// => ["C","002"]; // java string class=> split
+            id=dataArray[1]; // 002
+            int oldNumber= Integer.parseInt(id); // 2 => 00 remove
+            oldNumber++; // 3
+            if (oldNumber<9){
+                txtId.setText("C-00"+oldNumber);
+            }else if(oldNumber<99){
+                txtId.setText("C-0"+oldNumber);
+            }else{
+                txtId.setText("C-"+oldNumber);
+            }
+
+        }else{
+            txtId.setText("C-001");
+        }
     }
 
 }
