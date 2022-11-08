@@ -38,13 +38,18 @@ public class SignUpFormController {
             Thread.sleep(2000); // wait 2 seconds
             setUi("DashBoardForm");
         } else {
-            new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+            new Alert(Alert.AlertType.WARNING, "Already exists!, Try Again!").show();
         }
     }
     private void clearFields(){
         txtEmail.clear();txtFullName.clear();txtContact.clear();txtPassword.clear();txtRePassword.clear();
     }
     private boolean saveUser(User u){
+        for (User tempUser: Database.userTable){
+            if (tempUser.getEmail().equals(u.getEmail())){
+                return false;
+            }
+        }
         return Database.userTable.add(u);// inbuilt method ==> java.util
     }
 
