@@ -27,17 +27,17 @@
                         <Font name="Gadugi" size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField labelFloat="true" layoutX="96.0" layoutY="121.0" prefHeight="25.0" prefWidth="270.0" promptText="email">
+                  <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="96.0" layoutY="121.0" prefHeight="25.0" prefWidth="270.0" promptText="email">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXTextField>
-                  <JFXPasswordField labelFloat="true" layoutX="94.0" layoutY="305.0" prefHeight="30.0" prefWidth="270.0" promptText="Re-Password">
+                  <JFXPasswordField fx:id="txtRePassword" labelFloat="true" layoutX="94.0" layoutY="305.0" prefHeight="30.0" prefWidth="270.0" promptText="Re-Password">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXPasswordField>
-                  <JFXButton buttonType="RAISED" layoutX="94.0" layoutY="359.0" prefHeight="41.0" prefWidth="270.0" style="-fx-background-color: #0A6BED;" text="Sign up" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" layoutX="94.0" layoutY="359.0" onAction="#signUpOnAction" prefHeight="41.0" prefWidth="270.0" style="-fx-background-color: #0A6BED;" text="Sign up" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -56,17 +56,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXTextField labelFloat="true" layoutX="94.0" layoutY="166.0" prefHeight="25.0" prefWidth="270.0" promptText="Full Name">
+                  <JFXTextField fx:id="txtFullName" labelFloat="true" layoutX="94.0" layoutY="166.0" prefHeight="25.0" prefWidth="270.0" promptText="Full Name">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField labelFloat="true" layoutX="94.0" layoutY="214.0" prefHeight="25.0" prefWidth="270.0" promptText="Contact">
+                  <JFXTextField fx:id="txtContact" labelFloat="true" layoutX="94.0" layoutY="214.0" prefHeight="25.0" prefWidth="270.0" promptText="Contact">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </JFXTextField>
-                  <JFXPasswordField labelFloat="true" layoutX="94.0" layoutY="262.0" prefHeight="30.0" prefWidth="270.0" promptText="Password">
+                  <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="94.0" layoutY="262.0" prefHeight="30.0" prefWidth="270.0" promptText="Password">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
