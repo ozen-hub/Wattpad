@@ -1,5 +1,6 @@
 package com.seekerscloud.pos.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.seekerscloud.pos.db.Database;
 import com.seekerscloud.pos.model.Customer;
 import com.seekerscloud.pos.view.tm.CustomerTM;
@@ -28,6 +29,7 @@ public class CustomerFormController {
     public TableColumn colAddress;
     public TableColumn colSalary;
     public TableColumn colOption;
+    public JFXButton btnSaveUpdate;
 
     public void initialize(){
         setTableData();
@@ -40,6 +42,27 @@ public class CustomerFormController {
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("btn"));
         //==============
+
+        //=============Listeners=============
+        tblCustomer.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    if (null!=newValue){
+                        setCustomerData(newValue);
+                    }
+
+        });
+        //=============Listeners=============
+
+    }
+    private void setCustomerData(CustomerTM tm){
+        txtId.setText(tm.getId());
+        txtName.setText(tm.getName());
+        txtAddress.setText(tm.getAddress());
+        txtSalary.setText(String.valueOf(tm.getSalary()));
+
+        btnSaveUpdate.setText("Update Customer");
+
     }
 
     public void backToHomeOnAction(ActionEvent actionEvent) throws IOException {
@@ -55,19 +78,46 @@ public class CustomerFormController {
     }
 
     public void saveUpdateOnAction(ActionEvent actionEvent) {
+
         Customer customer = new Customer(
                 txtId.getText(),
                 txtName.getText(),
                 txtAddress.getText(),
                 Double.parseDouble(txtSalary.getText())
         );
-        if (Database.customerTable.add(customer)){
-            new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved!").show();
-            setTableData();
-            setCustomerId();
+
+        if (btnSaveUpdate.getText().equalsIgnoreCase("Save Customer")){
+            //save
+            if (Database.customerTable.add(customer)){
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved!").show();
+                setTableData();
+                setCustomerId();
+                clear();
+            }else{
+                new Alert(Alert.AlertType.CONFIRMATION, "Try Again").show();
+            }
         }else{
-            new Alert(Alert.AlertType.CONFIRMATION, "Try Again").show();
+            for(Customer c :Database.customerTable){
+                if (txtId.getText().equalsIgnoreCase(c.getId())){
+                    c.setName(txtName.getText());
+                    c.setAddress(txtAddress.getText());
+                    c.setSalary(Double.parseDouble(txtSalary.getText()));
+                    new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated!").show();
+                    setTableData();
+                    clear();
+                }
+            }
         }
+
+    }
+
+    private void clear(){
+        btnSaveUpdate.setText("Save Customer");
+
+        txtName.clear();
+        txtAddress.setText("");
+        txtSalary.clear();
+        setCustomerId();
     }
 
     private void setTableData(){
@@ -109,4 +159,7 @@ public class CustomerFormController {
         }
     }
 
+    public void newCustomerOnAction(ActionEvent actionEvent) {
+        clear();
+    }
 }
