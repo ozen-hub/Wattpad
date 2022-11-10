@@ -36,7 +36,7 @@
       <TextField fx:id="txtName" layoutX="240.0" layoutY="141.0" promptText="Name" />
       <TextField fx:id="txtAddress" layoutX="402.0" layoutY="141.0" promptText="Address" />
       <TextField fx:id="txtSalary" layoutX="562.0" layoutY="141.0" prefHeight="25.0" prefWidth="165.0" promptText="Salary" />
-      <JFXButton buttonType="RAISED" layoutX="739.0" layoutY="139.0" onAction="#backToHomeOnAction" style="-fx-background-color: #27ae60;" text="+" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="739.0" layoutY="139.0" onAction="#newCustomerOnAction" style="-fx-background-color: #27ae60;" text="+" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

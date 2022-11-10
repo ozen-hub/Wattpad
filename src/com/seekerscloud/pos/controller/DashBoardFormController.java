@@ -56,7 +56,8 @@ public class DashBoardFormController {
     public void openOrderDetailsOnAction(MouseEvent mouseEvent) {
     }
 
-    public void openPlaceOrderFormOnAction(MouseEvent mouseEvent) {
+    public void openPlaceOrderFormOnAction(MouseEvent mouseEvent) throws IOException {
+        setUi("PlaceOrderForm","Customer Form");
     }
 
     public void openProductManagementOnAction(MouseEvent mouseEvent) throws IOException {
