@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="525.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seekerscloud.pos.controller.PlaceOrderFormController">
+<AnchorPane fx:id="placeOrderContext" prefHeight="525.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seekerscloud.pos.controller.PlaceOrderFormController">
    <children>
       <JFXButton buttonType="RAISED" layoutX="22.0" layoutY="14.0" onAction="#backToHomeOnAction" style="-fx-background-color: #27ae60;" text="Back to home" textFill="WHITE">
          <font>
@@ -33,7 +33,7 @@
       <TextField layoutX="401.0" layoutY="80.0" promptText="Total Cost" />
       <TextField layoutX="561.0" layoutY="80.0" promptText="Item Count" />
       <Separator layoutX="143.0" layoutY="120.0" prefHeight="3.0" prefWidth="501.0" />
-      <ComboBox layoutX="22.0" layoutY="141.0" prefWidth="150.0" promptText="Customer" />
+      <ComboBox fx:id="cmbCustomerCodes" layoutX="22.0" layoutY="141.0" prefWidth="150.0" promptText="Customer" />
       <TextField layoutX="240.0" layoutY="141.0" promptText="Name" />
       <TextField layoutX="402.0" layoutY="141.0" promptText="Address" />
       <TextField layoutX="562.0" layoutY="141.0" prefHeight="25.0" prefWidth="165.0" promptText="Salary" />
@@ -45,7 +45,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <ComboBox layoutX="22.0" layoutY="197.0" prefWidth="150.0" promptText="Item" />
+      <ComboBox fx:id="cmbItemCodes" layoutX="22.0" layoutY="197.0" prefWidth="150.0" promptText="Item" />
       <TextField layoutX="184.0" layoutY="197.0" prefHeight="25.0" prefWidth="207.0" promptText="Description" />
       <TextField layoutX="402.0" layoutY="197.0" prefHeight="25.0" prefWidth="117.0" promptText="Unit Price" />
       <TextField layoutX="533.0" layoutY="197.0" prefHeight="25.0" prefWidth="117.0" promptText="QTY On Hand" />
