@@ -36,7 +36,7 @@ public class PlaceOrderFormController {
     public TextField txtItemCount;
     public TextField txtQty;
     public TableView<CartTM> tblCart;
-    public TableColumn<CartTM,String> colCode;
+    public TableColumn<CartTM, String> colCode;
     public TableColumn colDesc;
     public TableColumn colUnitPrice;
     public TableColumn colQty;
@@ -57,11 +57,11 @@ public class PlaceOrderFormController {
         setDate();
 
         //==============Listeners============
-            cmbCustomerCodes.getSelectionModel()
-                    .selectedItemProperty()
-                    .addListener((observable, oldValue, newValue) -> {
-                        setCustomerData(newValue);
-                    });
+        cmbCustomerCodes.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                    setCustomerData(newValue);
+                });
         cmbItemCodes.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
@@ -78,7 +78,7 @@ public class PlaceOrderFormController {
     private void setProductData(String code) {
         Product product = Database.productTable.stream().filter(e -> e.getCode().equals(code))
                 .findFirst().orElse(null);
-        if (product!=null){
+        if (product != null) {
             txtDescription.setText(product.getDescription());
             txtUnitPrice.setText(String.valueOf(product.getUnitPrice()));
             txtQtyOnHand.setText(String.valueOf(product.getQtyOnHand()));
@@ -89,7 +89,7 @@ public class PlaceOrderFormController {
         Stream<Customer> customerList =
                 Database.customerTable.stream().filter(e -> e.getId().equals(id));
         Optional<Customer> first = customerList.findFirst();
-        if (first.isPresent()){
+        if (first.isPresent()) {
             Customer customer = first.get();
             txtName.setText(customer.getName());
             txtAddress.setText(customer.getAddress());
@@ -127,30 +127,56 @@ public class PlaceOrderFormController {
                 new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml")))
         );
     }
+
     ObservableList<CartTM> tmList = FXCollections.observableArrayList();
+
     public void addToCart(ActionEvent actionEvent) {
         int qty = Integer.parseInt(txtQty.getText());
         double unitPrice = Double.parseDouble(txtUnitPrice.getText());
-        double total = qty* unitPrice;
+        double total = qty * unitPrice;
 
-        Button btn= new Button("Remove");
+        Button btn = new Button("Remove");
 
         CartTM existTm = isExists(cmbItemCodes.getValue());
-        if (existTm!=null){
-            existTm.setQty(existTm.getQty()+qty);
-            existTm.setTotal(existTm.getTotal()+total);
-        }else{
+        if (existTm != null) {
+            existTm.setQty(existTm.getQty() + qty);
+            existTm.setTotal(existTm.getTotal() + total);
+        } else {
             CartTM tm = new CartTM(cmbItemCodes.getValue(),
-                    txtDescription.getText(),unitPrice,qty,total,btn);
+                    txtDescription.getText(), unitPrice, qty, total, btn);
             tmList.add(tm);
         }
 
         tblCart.setItems(tmList);
         tblCart.refresh();
+        setTotalAndCount();
     }
 
-    private CartTM isExists(String id){
-        return tmList.stream().filter(e->e.getCode().equals(id)).findFirst().orElse(null);
+    private CartTM isExists(String id) {
+        /*for (CartTM tm : tmList
+        ) {
+            if (tm.getCode().equals(id)) {
+                return tm;
+            }
+        }
+        return null;*/
+
+        return tmList.stream().filter(e -> e.getCode().equals(id)).findFirst().orElse(null);
+    }
+
+    private void setTotalAndCount(){
+        double cost=0;
+       /* txtOrderTotal.setText(String.valueOf(0));
+        tmList.forEach(e->{
+            //txtOrderTotal.setText((Double.parseDouble(txtOrderTotal.getText())+e.getTotal())+"");
+            txtOrderTotal.setText(String.valueOf(Double.parseDouble(txtOrderTotal.getText())+e.getTotal()));
+        });*/
+        for (CartTM tm:tmList
+             ) {
+            cost+=tm.getTotal();
+        }
+        txtOrderTotal.setText(String.valueOf(cost));
+        txtItemCount.setText(String.valueOf(tmList.size()));
     }
 
 }
